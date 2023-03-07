@@ -21,17 +21,29 @@ contract tomuAuction is LinkedList{
         tomi = _tomi;
     }
  
-
+    // take approval
+    // check that tokens< 100k
+    // save that bids and address 
+    // insertup Linkedl
     function createBid( uint amount , uint price ) public {
         require(amount + allTomiToken <= tomiMaxAmount  );
-        SafeERC20.approve( tomi, msg.sender, address(this), amount);
+        // SafeERC20.safeApprove( tomi, msg.sender, address(this), amount);
         bids[msg.sender].bidAmount = amount ;
         bids[msg.sender].bidPrice = price ;
         insertUp(price);
     }
+//remove approval
+    // pop from linkedlist
+    // emit event
+    function cancelBid () public  {
+        //remove approval
+        remove( bids[msg.sender].bidAmount );
+        delete bids[msg.sender];
+        // emit event
+    }
 
-    function getHighest_ () public view{
-        getHighest();
+    function settleAuction () public {
+        
     }
 
 }
@@ -52,4 +64,3 @@ contract tomuAuction is LinkedList{
     // 
 
 
-    
